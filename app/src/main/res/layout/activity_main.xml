@@ -7,17 +7,121 @@
     android:background="@mipmap/greenfelt_background"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/titleCard"
+        android:layout_width="196dp"
+        android:layout_height="222dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+        app:srcCompat="@mipmap/blue_back"
+        tools:layout_editor_absoluteY="26dp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Blackjack"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleCard" />
+
+    <LinearLayout
+        android:layout_width="313dp"
+        android:layout_height="109dp"
+        android:layout_marginTop="36dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleCard">
+
+        <Button
+            android:id="@+id/newgameButton"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/transparent_bg_bordered_button"
+            android:fontFamily="@font/roboto"
+            android:padding="10dp"
+            android:text="New Game"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/hitmeButton"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="71dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:autoSizeTextType="none"
+            android:background="@drawable/transparent_bg_bordered_button"
+            android:fontFamily="@font/roboto"
+            android:padding="10dp"
+            android:text="Hit Me!"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/holdButton"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="55dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/transparent_bg_bordered_button"
+            android:fontFamily="@font/roboto"
+            android:padding="10dp"
+            android:text="Hold"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/statsButton"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="62dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/transparent_bg_bordered_button"
+            android:fontFamily="@font/roboto"
+            android:padding="10dp"
+            android:text="Stats"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/card"
+        android:layout_width="204dp"
+        android:layout_height="303dp"
+        android:layout_marginBottom="88dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/screen_background_light_transparent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
