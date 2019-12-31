@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.setPadding
 import kotlin.math.round
 import kotlin.random.Random
 
@@ -155,6 +157,7 @@ class MainActivity : AppCompatActivity() {
 
         //Declare Card Holder
         val cardHolder = findViewById(R.id.cardHolder) as LinearLayout
+        val dCardHolder = findViewById(R.id.dCardHolder) as LinearLayout
 
         //Declare New Game Button
         val newgameButton = findViewById(R.id.newgameButton) as Button
@@ -175,8 +178,8 @@ class MainActivity : AppCompatActivity() {
 
         //Declare Buttons Holder
         val buttonHolder = findViewById(R.id.buttonHolder) as LinearLayout
-
-        val params = buttonHolder.getLayoutParams()
+        //Get Buttons holder parameters
+        val buttonsParams = buttonHolder.getLayoutParams()
 
         //New Game Button onClick
         newgameButton.setOnClickListener {
@@ -185,10 +188,11 @@ class MainActivity : AppCompatActivity() {
             //set buttons from invisible to visible
             hitmeButton.setVisibility(View.VISIBLE)
             holdButton.setVisibility(View.VISIBLE)
-            params.width = 800
+            buttonsParams.width = 800
             s2.setVisibility(View.VISIBLE)
             s3.setVisibility(View.VISIBLE)
             cardHolder.removeAllViews() //Removes cards from card holder
+            dCardHolder.removeAllViews()
             cards = mutableListOf(getCard(), getCard()) //saves two new cards to players hand
             getCardNum() //Get card number of new cards
             bottomMsg.setTextSize(TypedValue.COMPLEX_UNIT_SP,(18).toFloat()) //Reset bottom message text size for card count
@@ -197,6 +201,9 @@ class MainActivity : AppCompatActivity() {
                 val cardview = ImageView(this)
                 cardview.setImageResource(getResources().getIdentifier(card, "mipmap", this.packageName))
                 cardHolder.addView(cardview)
+                val cardParams = cardview.getLayoutParams()
+                cardParams.width = 225
+                cardview.setPadding(10)
             }
         }
 
@@ -208,6 +215,9 @@ class MainActivity : AppCompatActivity() {
                 val cardview = ImageView(this)
                 cardview.setImageResource(getResources().getIdentifier(card, "mipmap", this.packageName))
                 cardHolder.addView(cardview)
+                val cardParams = cardview.getLayoutParams()
+                cardParams.width = 225
+                cardview.setPadding(10)
             }
             getCardNum()
             bottomMsg.setText("Card Count: ${hand}")
@@ -221,7 +231,7 @@ class MainActivity : AppCompatActivity() {
                 //Set Buttons from visible to invisible
                 hitmeButton.setVisibility(View.GONE)
                 holdButton.setVisibility(View.GONE)
-                params.width = 425
+                buttonsParams.width = 425
                 s2.setVisibility(View.GONE)
                 s3.setVisibility(View.GONE)
             }
@@ -229,7 +239,7 @@ class MainActivity : AppCompatActivity() {
                 //Set Buttons from visible to invisible
                 hitmeButton.setVisibility(View.GONE)
                 holdButton.setVisibility(View.GONE)
-                params.width = 425
+                buttonsParams.width = 425
                 s2.setVisibility(View.GONE)
                 s3.setVisibility(View.GONE)
                 //Dealer Behavior
@@ -238,6 +248,14 @@ class MainActivity : AppCompatActivity() {
                 while(dealerHand <= 15){
                     dealerCards.add(getCard())
                     getCardNum()
+                }
+                for(card in dealerCards){ //Shows card in card holder
+                    val cardview = ImageView(this)
+                    cardview.setImageResource(getResources().getIdentifier(card, "mipmap", this.packageName))
+                    dCardHolder.addView(cardview)
+                    val cardParams = cardview.getLayoutParams()
+                    cardParams.width = 225
+                    cardview.setPadding(10)
                 }
                 if(hand > dealerHand || dealerHand > 21){
                     gameWin += 1
@@ -268,12 +286,20 @@ class MainActivity : AppCompatActivity() {
             //Set Buttons from visible to invisible
             hitmeButton.setVisibility(View.GONE)
             holdButton.setVisibility(View.GONE)
-            params.width = 425
+            buttonsParams.width = 425
             s2.setVisibility(View.GONE)
             s3.setVisibility(View.GONE)
             while(dealerHand <= 15){
                 dealerCards.add(getCard())
                 getCardNum()
+            }
+            for(card in dealerCards){ //Shows card in card holder
+                val cardview = ImageView(this)
+                cardview.setImageResource(getResources().getIdentifier(card, "mipmap", this.packageName))
+                dCardHolder.addView(cardview)
+                val cardParams = cardview.getLayoutParams()
+                cardParams.width = 225
+                cardview.setPadding(10)
             }
             if(hand > dealerHand || dealerHand > 21){
                 gameWin += 1
