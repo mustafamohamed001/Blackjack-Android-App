@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import kotlin.math.round
@@ -142,14 +143,16 @@ class MainActivity : AppCompatActivity() {
         dealerHand = num
     }
 
-
-
+    //App Logic
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         //Declare Button Text Message
         val buttomMsg = findViewById(R.id.buttomMsg) as TextView
+
+        //Declare Card Holder
+        val cardHolder = findViewById(R.id.cardHolder) as LinearLayout
 
         //Declare New Game Button
         val newgameButton = findViewById(R.id.newgameButton) as Button
@@ -160,9 +163,9 @@ class MainActivity : AppCompatActivity() {
             cards = mutableListOf(getCard(), getCard())
             getCardNum()
             buttomMsg.setText("Card Count: ${hand}")
-            for(card in cards){
-                println(card)
-            }
+//            for(card in cards){
+//                println(card)
+//            }
             val card = findViewById(R.id.card) as ImageView
             card.setImageResource(getResources().getIdentifier("blue_back", "mipmap", this.packageName))
         }
@@ -176,6 +179,7 @@ class MainActivity : AppCompatActivity() {
             if(hand > 21){
                 gameState = 3
                 gameLost += 1
+                buttomMsg.setText("Bust!!!")
             }
             else if(hand == 21){
                 //Dealer Behavior
@@ -188,14 +192,17 @@ class MainActivity : AppCompatActivity() {
                 if(hand > dealerHand || dealerHand > 21){
                     gameWin += 1
                     gameState = 0
+                    buttomMsg.setText("You Win!!!")
                 }
                 else if(dealerHand > hand){
                     gameLost += 1
                     gameState = 1
+                    buttomMsg.setText("You Lost :(")
                 }
                 else if(dealerHand == hand){
                     gameTie += 1
                     gameState = 2
+                    buttomMsg.setText("Tied Game!!")
                 }
             }
         }
@@ -214,14 +221,17 @@ class MainActivity : AppCompatActivity() {
             if(hand > dealerHand || dealerHand > 21){
                 gameWin += 1
                 gameState = 0
+                buttomMsg.setText("You Win!!!")
             }
             else if(dealerHand > hand){
                 gameLost += 1
                 gameState = 1
+                buttomMsg.setText("You Lost :(")
             }
             else if(dealerHand == hand){
                 gameTie += 1
                 gameState = 2
+                buttomMsg.setText("Tied Game!!")
             }
         }
 

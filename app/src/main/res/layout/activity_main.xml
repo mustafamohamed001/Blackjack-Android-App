@@ -115,6 +115,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/cardHolder"
         android:layout_width="385dp"
         android:layout_height="290dp"
         android:gravity="center_horizontal"
@@ -139,7 +140,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:textColor="#FFFFFF"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
