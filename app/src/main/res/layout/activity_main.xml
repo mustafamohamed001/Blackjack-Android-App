@@ -30,8 +30,8 @@
         app:layout_constraintTop_toBottomOf="@+id/titleCard" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="313dp"
+        android:id="@+id/buttonHolder"
+        android:layout_width="170dp"
         android:layout_height="109dp"
         android:layout_marginTop="36dp"
         android:gravity="center_horizontal"
@@ -56,9 +56,12 @@
             android:textSize="16sp" />
 
         <Space
+            android:id="@+id/s1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:visibility="visible"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/hitmeButton"
@@ -73,12 +76,16 @@
             android:text="Hit Me!"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
 
         <Space
+            android:id="@+id/s2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:visibility="gone"
+            tools:visibility="gone" />
 
         <Button
             android:id="@+id/holdButton"
@@ -92,12 +99,16 @@
             android:text="Hold"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
 
         <Space
+            android:id="@+id/s3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:visibility="gone"
+            tools:visibility="gone" />
 
         <Button
             android:id="@+id/statsButton"
@@ -123,19 +134,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.233">
-
-        <ImageView
-            android:id="@+id/card"
-            android:layout_width="158dp"
-            android:layout_height="224dp"
-            android:layout_marginBottom="88dp"
-            app:srcCompat="@android:drawable/screen_background_light_transparent" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/buttonHolder"
+        app:layout_constraintVertical_bias="0.092" />
 
     <TextView
-        android:id="@+id/buttomMsg"
+        android:id="@+id/bottomMsg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"

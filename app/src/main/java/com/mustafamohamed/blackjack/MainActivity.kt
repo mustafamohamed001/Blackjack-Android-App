@@ -3,10 +3,9 @@ package com.mustafamohamed.blackjack
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.util.TypedValue
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import kotlin.math.round
 import kotlin.random.Random
@@ -34,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     //Functions
     //Generate Card
     fun getCard():String{
+        //Random card and suit generator
         val card = Random.nextInt(1,14)
         val suit = Random.nextInt(0,4)
         //Suits
@@ -42,32 +42,34 @@ class MainActivity : AppCompatActivity() {
         // 2 - Diamonds
         // 3 - Hearts
 
+        //Format card and suit into string to save
         var suitLetter = ""
         if(suit == 0){
-            suitLetter = "S"
+            suitLetter = "s"
         }
         else if(suit == 1){
-            suitLetter = "C"
+            suitLetter = "c"
         }
         else if(suit == 2){
-            suitLetter = "D"
+            suitLetter = "d"
         }
         else if(suit == 3){
-            suitLetter = "H"
+            suitLetter = "h"
         }
+
         if(card == 11){
-            return "J" + suitLetter
+            return "c" + "j" + suitLetter
         }
         else if(card == 12){
-            return "Q" + suitLetter
+            return "c" + "q" + suitLetter
         }
         else if(card == 13){
-            return "K" + suitLetter
+            return "c" + "k" + suitLetter
         }
         else if(card == 1){
-            return "A" + suitLetter
+            return "c" + "a" + suitLetter
         }
-        return card.toString() + suitLetter
+        return "c" + card.toString() + suitLetter
 
     }
 
@@ -77,17 +79,17 @@ class MainActivity : AppCompatActivity() {
         var num = 0
         var temp = ""
         for (card in cards) {
-            temp = card.substring(0, card.length - 1)
-            if(temp == "A"){
+            temp = card.substring(1, card.length - 1) //Removes c at beginning and card suit
+            if(temp == "a"){
                 num += 0
             }
-            else if (temp == "J"){
+            else if (temp == "j"){
                 num += 10
             }
-            else if (temp == "Q"){
+            else if (temp == "q"){
                 num += 10
             }
-            else if (temp == "K"){
+            else if (temp == "k"){
                 num += 10
             }
             else {
@@ -96,8 +98,8 @@ class MainActivity : AppCompatActivity() {
         }
         //Automatically makes Ace 1 or 11 in players benefit
         for (card in cards) {
-            temp = card.substring(0, card.length - 1)
-            if(temp == "A"){
+            temp = card.substring(1, card.length - 1)
+            if(temp == "a"){
                 if((num+11) > 21){
                     num += 1
                 }
@@ -111,17 +113,17 @@ class MainActivity : AppCompatActivity() {
         num = 0
         temp = ""
         for (card in dealerCards) {
-            temp = card.substring(0, card.length - 1)
-            if(temp == "A"){
+            temp = card.substring(1, card.length - 1)
+            if(temp == "a"){
                 num += 0
             }
-            else if (temp == "J"){
+            else if (temp == "j"){
                 num += 10
             }
-            else if (temp == "Q"){
+            else if (temp == "q"){
                 num += 10
             }
-            else if (temp == "K"){
+            else if (temp == "k"){
                 num += 10
             }
             else {
@@ -130,8 +132,8 @@ class MainActivity : AppCompatActivity() {
         }
         //Automatically makes Ace 1 or 11 in dealers benefit
         for (card in dealerCards) {
-            temp = card.substring(0, card.length - 1)
-            if(temp == "A"){
+            temp = card.substring(1, card.length - 1)
+            if(temp == "a"){
                 if((num+11) > 21){
                     num += 1
                 }
@@ -149,39 +151,87 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //Declare Button Text Message
-        val buttomMsg = findViewById(R.id.buttomMsg) as TextView
+        val bottomMsg = findViewById(R.id.bottomMsg) as TextView
 
         //Declare Card Holder
         val cardHolder = findViewById(R.id.cardHolder) as LinearLayout
 
         //Declare New Game Button
         val newgameButton = findViewById(R.id.newgameButton) as Button
+
+        //Declare Hit Me Button
+        val hitmeButton = findViewById(R.id.hitmeButton) as Button
+
+        //Declare Hold Button
+        val holdButton = findViewById(R.id.holdButton) as Button
+
+        //Declare Stats Button
+        val statsButton = findViewById(R.id.statsButton) as Button
+
+        //Declare Spaces
+        val s1 = findViewById(R.id.s1) as Space
+        val s2 = findViewById(R.id.s2) as Space
+        val s3 = findViewById(R.id.s3) as Space
+
+        //Declare Buttons Holder
+        val buttonHolder = findViewById(R.id.buttonHolder) as LinearLayout
+
+        val params = buttonHolder.getLayoutParams()
+
         //New Game Button onClick
         newgameButton.setOnClickListener {
             gamesPlayed += 1
             gameState = -1
-            cards = mutableListOf(getCard(), getCard())
-            getCardNum()
-            buttomMsg.setText("Card Count: ${hand}")
-//            for(card in cards){
-//                println(card)
-//            }
-            val card = findViewById(R.id.card) as ImageView
-            card.setImageResource(getResources().getIdentifier("blue_back", "mipmap", this.packageName))
+            //set buttons from invisible to visible
+            hitmeButton.setVisibility(View.VISIBLE)
+            holdButton.setVisibility(View.VISIBLE)
+            params.width = 800
+            s2.setVisibility(View.VISIBLE)
+            s3.setVisibility(View.VISIBLE)
+            cardHolder.removeAllViews() //Removes cards from card holder
+            cards = mutableListOf(getCard(), getCard()) //saves two new cards to players hand
+            getCardNum() //Get card number of new cards
+            bottomMsg.setTextSize(TypedValue.COMPLEX_UNIT_SP,(18).toFloat()) //Reset bottom message text size for card count
+            bottomMsg.setText("Card Count: ${hand}")
+            for(card in cards){ //Shows card in card holder
+                val cardview = ImageView(this)
+                cardview.setImageResource(getResources().getIdentifier(card, "mipmap", this.packageName))
+                cardHolder.addView(cardview)
+            }
         }
 
-        //Declare Hit Me Button
-        val hitmeButton = findViewById(R.id.hitmeButton) as Button
+        //Hit Me Button onClick Behavior
         hitmeButton.setOnClickListener {
             cards.add(getCard())
+            cardHolder.removeAllViews()
+            for(card in cards){
+                val cardview = ImageView(this)
+                cardview.setImageResource(getResources().getIdentifier(card, "mipmap", this.packageName))
+                cardHolder.addView(cardview)
+            }
             getCardNum()
-            buttomMsg.setText("Card Count: ${hand}")
+            bottomMsg.setText("Card Count: ${hand}")
+
+            //Player hand check
             if(hand > 21){
                 gameState = 3
                 gameLost += 1
-                buttomMsg.setText("Bust!!!")
+                bottomMsg.setTextSize(TypedValue.COMPLEX_UNIT_SP,(30).toFloat())
+                bottomMsg.setText("Bust!!!")
+                //Set Buttons from visible to invisible
+                hitmeButton.setVisibility(View.GONE)
+                holdButton.setVisibility(View.GONE)
+                params.width = 425
+                s2.setVisibility(View.GONE)
+                s3.setVisibility(View.GONE)
             }
             else if(hand == 21){
+                //Set Buttons from visible to invisible
+                hitmeButton.setVisibility(View.GONE)
+                holdButton.setVisibility(View.GONE)
+                params.width = 425
+                s2.setVisibility(View.GONE)
+                s3.setVisibility(View.GONE)
                 //Dealer Behavior
                 dealerCards = mutableListOf(getCard(), getCard())
                 getCardNum()
@@ -192,28 +242,35 @@ class MainActivity : AppCompatActivity() {
                 if(hand > dealerHand || dealerHand > 21){
                     gameWin += 1
                     gameState = 0
-                    buttomMsg.setText("You Win!!!")
+                    bottomMsg.setTextSize(TypedValue.COMPLEX_UNIT_SP,(30).toFloat())
+                    bottomMsg.setText("You Win!!!")
                 }
                 else if(dealerHand > hand){
                     gameLost += 1
                     gameState = 1
-                    buttomMsg.setText("You Lost :(")
+                    bottomMsg.setTextSize(TypedValue.COMPLEX_UNIT_SP,(30).toFloat())
+                    bottomMsg.setText("You Lost :(")
                 }
                 else if(dealerHand == hand){
                     gameTie += 1
                     gameState = 2
-                    buttomMsg.setText("Tied Game!!")
+                    bottomMsg.setTextSize(TypedValue.COMPLEX_UNIT_SP,(30).toFloat())
+                    bottomMsg.setText("Tied Game!!")
                 }
             }
         }
 
-        //Declare Hold Button
-        val holdButton = findViewById(R.id.holdButton) as Button
-        //Hold Button onClick
+        //Hold Button onClick Behavior
         holdButton.setOnClickListener {
             //Dealer Behavior
             dealerCards = mutableListOf(getCard(), getCard())
             getCardNum()
+            //Set Buttons from visible to invisible
+            hitmeButton.setVisibility(View.GONE)
+            holdButton.setVisibility(View.GONE)
+            params.width = 425
+            s2.setVisibility(View.GONE)
+            s3.setVisibility(View.GONE)
             while(dealerHand <= 15){
                 dealerCards.add(getCard())
                 getCardNum()
@@ -221,23 +278,24 @@ class MainActivity : AppCompatActivity() {
             if(hand > dealerHand || dealerHand > 21){
                 gameWin += 1
                 gameState = 0
-                buttomMsg.setText("You Win!!!")
+                bottomMsg.setTextSize(TypedValue.COMPLEX_UNIT_SP,(30).toFloat())
+                bottomMsg.setText("You Win!!!")
             }
             else if(dealerHand > hand){
                 gameLost += 1
                 gameState = 1
-                buttomMsg.setText("You Lost :(")
+                bottomMsg.setTextSize(TypedValue.COMPLEX_UNIT_SP,(30).toFloat())
+                bottomMsg.setText("You Lost :(")
             }
             else if(dealerHand == hand){
                 gameTie += 1
                 gameState = 2
-                buttomMsg.setText("Tied Game!!")
+                bottomMsg.setTextSize(TypedValue.COMPLEX_UNIT_SP,(30).toFloat())
+                bottomMsg.setText("Tied Game!!")
             }
         }
 
-        //Declare Stats Button
-        val statsButton = findViewById(R.id.statsButton) as Button
-        //Stats Button onClick
+        //Stats Button onClick Behavior
         statsButton.setOnClickListener {
 
             //Dialog Builder
