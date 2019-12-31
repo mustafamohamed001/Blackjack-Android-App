@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/cardHolder"
-        android:layout_width="385dp"
+        android:layout_width="wrap_content"
         android:layout_height="180dp"
         android:gravity="center_horizontal|top"
         android:orientation="horizontal"
@@ -154,7 +154,7 @@
 
     <LinearLayout
         android:id="@+id/dCardHolder"
-        android:layout_width="385dp"
+        android:layout_width="wrap_content"
         android:layout_height="180dp"
         android:gravity="center_horizontal|top"
         android:orientation="horizontal"
