@@ -30,6 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/titleCard" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="313dp"
         android:layout_height="109dp"
         android:layout_marginTop="36dp"
@@ -44,7 +45,7 @@
             android:id="@+id/newgameButton"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/transparent_bg_bordered_button"
             android:fontFamily="@font/roboto"
@@ -63,7 +64,7 @@
             android:id="@+id/hitmeButton"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="71dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_marginTop="32dp"
             android:autoSizeTextType="none"
             android:background="@drawable/transparent_bg_bordered_button"
@@ -83,7 +84,7 @@
             android:id="@+id/holdButton"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="55dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/transparent_bg_bordered_button"
             android:fontFamily="@font/roboto"
@@ -102,7 +103,7 @@
             android:id="@+id/statsButton"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="62dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/transparent_bg_bordered_button"
             android:fontFamily="@font/roboto"
@@ -113,15 +114,36 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/card"
-        android:layout_width="204dp"
-        android:layout_height="303dp"
-        android:layout_marginBottom="88dp"
+    <LinearLayout
+        android:layout_width="385dp"
+        android:layout_height="290dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/screen_background_light_transparent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.233">
+
+        <ImageView
+            android:id="@+id/card"
+            android:layout_width="158dp"
+            android:layout_height="224dp"
+            android:layout_marginBottom="88dp"
+            app:srcCompat="@android:drawable/screen_background_light_transparent" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/buttomMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
